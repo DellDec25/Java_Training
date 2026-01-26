@@ -1,0 +1,14 @@
+/**
+ * 
+ */
+package ph.com.bpi.practice.main;
+
+/**
+ * 
+ */
+public class InvalidAmountException extends Exception {
+
+	public InvalidAmountException(String message) {
+		super(message);
+	}
+}
