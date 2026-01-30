@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+ 
+    <!-- Use an absolute path to rule out working-directory issues -->
+    <!-- Linux/macOS example -->     
+    <!-- Windows example (if you’re on Windows, change to something like C:/myapp/logs) -->
+    <property name="LOG_DIR" value="C:\Temp\asdf123\sts-4.31.0.RELEASE\PracticeJAVAactivity\logs"/>
+ 
+    <!----> property name="APP_NAME" value="PracticeJAVAactivity"--->
+ 
+    <property name="APP_NAME" value="BankAccount"/>
+    <!-- Show Logback's own diagnostics in the console -->
+    <statusListener class="ch.qos.logback.core.status.OnConsoleStatusListener"/>
+ 
+    <!-- Console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+    <!-- File (daily rotation, keep 7 days) -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_DIR}/${APP_NAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_DIR}/${APP_NAME}.%d{yyyy-MM-dd}.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+            <totalSizeCap>1GB</totalSizeCap> 
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level [%thread] %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+ 
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    <root level="ERROR">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+    <root level="DEBUG">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="FILE"/>
+    </root>
+</configuration>
